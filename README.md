@@ -5,45 +5,59 @@ Security Assertion Markup Language (SAML) is an XML based open  data format for 
 
 Apigee Edge enables you to authenticate and authorize apps that are capable of presenting SAML tokens. A SAML token is a digitally signed fragment of XML that presents a set of "assertions". Apigee can function as a service provider (SP) or an Identity Provider (IDP) and provides policies for SAML Assertion generation and validation. 
 
-In this article we will build a sample application where Apigee functions as an Identity Provider (IDP) and Salesforce as a service provider (SP).  The high level flows are as shown below
+In this example we will build a sample application where Apigee functions as an Identity Provider (IDP) and Salesforce as a service provider (SP).  The high level flows are as shown below
 
 ![SAML FLow](https://github.com/shahbagdadi/apigee-saml-idp/blob/master/images/saml-idp.jpg "SAML Flow")
 
 
-License - [MIT](https://github.com/shahbagdadi/apigee-saml-idp/blob/master/LICENSE.md)
+
+####License 
+The documentation and associated code provided here are covered under [MIT License](https://github.com/shahbagdadi/apigee-saml-idp/blob/master/LICENSE.md)
 
 
 ###Installation 
+The steps for installation and configuration required to run this example is as listed below.
 
 ####Certificates
 One of the first thing you will have to do is to generates the certificates that will be used for digital signatures. You can use openssl to create certificates as shown below.
 
+```
 $ mkdir certs
 $ cd certs
 $ openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 730
+```
 
 This will create the files key.pem and cert.pem. Then create a descriptor.properties files
+```
 $mkdir META-INF
-$ then add the following to the file  /META-INF/descriptor.properties
+then add the following to the file  /META-INF/descriptor.properties
 cert.pem
 key.pem
+```
 
 Then generate a jar containing your keypair and certificates
+```
 jar -cf idpKeystore.jar cert.pem key.pem
+```
 
 Add decriptor.properties to your jar
+```
 $ jar -uf idpKeystore.jar META-INF/descriptor.properties
+```
 
 Now create a keystore for your environment.
+```
 $ curl -H "Content-Type: text/xml" \
 https://api.enterprise.apigee.com/v1/o/{org_name}/environments/{env_name}/keystores \
 -d '<KeyStore name="idpKeystore"/>' -u myname:mypass
+```
 
 Now upload the jar file to the keystore
+```
 $ curl -X POST -H "Content-Type: multipart/form-data" \
 -F file="@idpKeystore.jar" \ "https://api.enterprise.apigee.com/v1/o/{org_name}/environments/{env_name}/keystores/idpKeystore/keys?alias={key_alias}&password={key_pass}" \
 -u myname:mypass
-
+```
 
 Next we will first do the necessary configurations in Salesforce.
 ####Salesforce (Service Provider) Setup
