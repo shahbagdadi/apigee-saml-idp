@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="1" name="saml">
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1426738035808</CreatedAt>
+    <CreatedBy>sbagdadi@apigee.com</CreatedBy>
+    <Description>A sample proxy demonstarting Apigee SAML capabilities</Description>
+    <DisplayName>Apigee SAML IDP</DisplayName>
+    <LastModifiedAt>1426889441952</LastModifiedAt>
+    <LastModifiedBy>sbagdadi@apigee.com</LastModifiedBy>
+    <Policies>
+        <Policy>ExtractRequest</Policy>
+        <Policy>GenerateSAMLAssertion</Policy>
+        <Policy>SetLogoutResponse</Policy>
+        <Policy>createResponse</Policy>
+        <Policy>createSAMLResponse</Policy>
+        <Policy>decodeRequest</Policy>
+        <Policy>getFormattedTime</Policy>
+        <Policy>setResponse</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://SetLogoutResponse.js</Resource>
+        <Resource>jsc://base64.js</Resource>
+        <Resource>jsc://createSAMLResponse.js</Resource>
+        <Resource>jsc://decodeRequest.js</Resource>
+        <Resource>jsc://getFormattedTime.js</Resource>
+        <Resource>jsc://setResponse.js</Resource>
+    </Resources>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+    <validate>false</validate>
+</APIProxy>

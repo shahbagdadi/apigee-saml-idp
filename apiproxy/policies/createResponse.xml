@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="createResponse">
+    <DisplayName>createResponse</DisplayName>
+    <Set>
+      <Payload contentType="application/xml">
+<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" ID="_257f9d9e9fa14962c0803903a6ccad931245264310738" IssueInstant="{myTime}" Version="2.0">
+<saml:Issuer xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Format="urn:oasis:names:tc:SAML:2.0:nameid-format:entity">{sf.issuer}</saml:Issuer>
+<samlp:Status><samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/></samlp:Status>
+        {assertion.content}
+        </samlp:Response>
+
+      </Payload>
+
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+  <AssignTo createNew="true" type="response">response</AssignTo>
+</AssignMessage>

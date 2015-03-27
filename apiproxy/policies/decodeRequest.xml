@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- 
+<Javascript async="false" continueOnError="false" enabled="true" timeLimit="200" name="decodeRequest">
+    <DisplayName>decodeRequest</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <IncludeURL>jsc://base64.js</IncludeURL>
+    <ResourceURL>jsc://decodeRequest.js</ResourceURL> 
+    <ResourceURL>py://base64-decode.py</ResourceURL>
+</Javascript>
+-->
+
+<Script async="false" continueOnError="false" enabled="true" name="decodeRequest">
+    <DisplayName>decodeRequest</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <ResourceURL>py://base64-decode.py</ResourceURL>
+</Script>

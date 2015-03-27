@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <Description/>
+    <PreFlow name="PreFlow">
+        <Request/>
+        <Response/>
+    </PreFlow>
+    <Flows>
+        <Flow name="Login">
+            <Description/>
+            <Request>
+                <Step>
+                    <FaultRules/>
+                    <Name>setConfig</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Name>extractRequest</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Name>decodeRequest</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <FaultRules/>
+                    <Name>setResponse</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Name>createResponse</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Name>createSAMLResponse</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath &quot;/idp/login&quot;)</Condition>
+        </Flow>
+        <Flow name="Logout">
+            <Description/>
+            <Request/>
+            <Response>
+                <Step>
+                    <FaultRules/>
+                    <Name>setLogoutResponse</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath &quot;/idp/logout&quot;)</Condition>
+        </Flow>
+    </Flows>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <HTTPProxyConnection>
+        <BasePath>/saml</BasePath>
+        <VirtualHost>default</VirtualHost>
+        <VirtualHost>secure</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="no-route">
+        <Condition>(proxy.pathsuffix MatchesPath &quot;/idp/logout&quot;)</Condition>
+    </RouteRule>
+    <RouteRule name="default">
+        <TargetEndpoint>default</TargetEndpoint>
+    </RouteRule>
+</ProxyEndpoint>

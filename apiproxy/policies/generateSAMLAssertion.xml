@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<GenerateSAMLAssertion ignoreContentType="true" name="generateSAMLAssertion">
+    <DisplayName>generateSAMLAssertion</DisplayName>
+    <KeyStore>
+        <Name ref="apigee.keystore"></Name>
+        <Alias ref="apigee.keyalias"></Alias>
+    </KeyStore>
+    <Subject ref="sf.subject"></Subject>
+    <Issuer ref="sf.issuer"></Issuer>
+  <Template ignoreUnresolvedVariables="false"><![CDATA[
+
+<saml:Assertion xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	ID="{saml.id}" Version="2.0" IssueInstant="{saml.issueInstant}">
+	<saml:Issuer>{saml.issuer}</saml:Issuer>
+
+<saml:Subject>
+    <saml:NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified">{saml.subject}</saml:NameID>
+    <saml:SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:bearer">
+        <saml:SubjectConfirmationData NotOnOrAfter="2015-06-26T02:44:24.173Z" Recipient="https://login.salesforce.com?so=00D1a000000HIXB"/>
+    </saml:SubjectConfirmation>
+</saml:Subject>
+   <saml:Conditions NotBefore="2014-06-17T08:45:10.738Z" 
+      NotOnOrAfter="2015-06-17T18:50:10.738Z">
+      <saml:AudienceRestriction>
+         <saml:Audience>https://saml.salesforce.com</saml:Audience>
+      </saml:AudienceRestriction>
+   </saml:Conditions>
+   <saml:AuthnStatement AuthnInstant="{myTime}">
+      <saml:AuthnContext>
+         <saml:AuthnContextClassRef>urn:oasis:names:tc:SAML:2.0:ac:classes:unspecified</saml:AuthnContextClassRef>
+      </saml:AuthnContext>
+   </saml:AuthnStatement>
+</saml:Assertion>
+
+	]]></Template>
+    <OutputVariable>
+      <!--
+      	<Message name="request">
+		<Namespaces>
+			<Namespace prefix="soap-env">http://schemas.xmlsoap.org/soap/envelope/</Namespace>
+		</Namespaces>
+		<XPath>/soap-env:Envelope/soap-env:Header</XPath> 
+	</Message>
+      -->
+        <FlowVariable name="assertion.content"/>
+    </OutputVariable>
+</GenerateSAMLAssertion>
