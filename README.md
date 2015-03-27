@@ -67,9 +67,8 @@ Next we will first do the necessary configurations in Salesforce.
 2. Login and select Security Controls -> Single Sign-On Settings 
 ![SSO Settings](https://github.com/shahbagdadi/apigee-saml-idp/blob/master/images/step2.png "SSO Settings")
 
-Check the SAML enabled check box shown on the screen.
 
-3. Add the SAML Single sign-on settings as shown below and hit save.
+3. Check the SAML enabled check box shown on the screen and add the SAML Single sign-on settings as shown below.
 ![SSO Settings](https://github.com/shahbagdadi/apigee-saml-idp/blob/master/images/step3.png "SSO Settings")
 
 4. Register a your sub domain in Salesforce
